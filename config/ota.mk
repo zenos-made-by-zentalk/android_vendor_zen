@@ -8,14 +8,14 @@ CUSTOM_OTA_VERSION_CODE := pie
 endif
 
 CUSTOM_PROPERTIES += \
-    org.pixelexperience.ota.version_code=$(CUSTOM_OTA_VERSION_CODE) \
+    org.zen.ota.version_code=$(CUSTOM_OTA_VERSION_CODE) \
     sys.ota.disable_uncrypt=1
 
 PRODUCT_PACKAGES += \
     Updates
 
 PRODUCT_COPY_FILES += \
-    vendor/aosp/config/permissions/org.pixelexperience.ota.xml:system/etc/permissions/org.pixelexperience.ota.xml
+    vendor/zen/config/permissions/org.zen.ota.xml:system/etc/permissions/org.zen.ota.xml
 
 endif
 endif

@@ -9,7 +9,7 @@ Additional functions:
 - pixelrebase:     Rebase a Gerrit change and push it again.
 - aospremote:      Add git remote for matching AOSP repository.
 - cafremote:       Add git remote for matching CodeAurora repository.
-- githubremote:    Add git remote for PixelExperience Github.
+- githubremote:    Add git remote for ZenOS Github.
 - mka:             Builds using SCHED_BATCH on all processors.
 - mkap:            Builds the module(s) using mka and pushes them to the device.
 - cmka:            Cleans and builds using mka.
@@ -70,7 +70,7 @@ function breakfast()
     local variant=$2
     unset LUNCH_MENU_CHOICES
     add_lunch_combo full-eng
-    for f in `/bin/ls vendor/aosp/vendorsetup.sh 2> /dev/null`
+    for f in `/bin/ls vendor/zen/vendorsetup.sh 2> /dev/null`
         do
             echo "including $f"
             . $f
@@ -91,7 +91,7 @@ function breakfast()
                 variant="userdebug"
             fi
 
-            lunch aosp_$target-$variant
+            lunch zen_$target-$variant
         fi
     fi
     return $?
@@ -102,7 +102,7 @@ alias bib=breakfast
 function eat()
 {
     if [ "$OUT" ] ; then
-        ZIPPATH=`ls -tr "$OUT"/PixelExperience-*.zip | tail -1`
+        ZIPPATH=`ls -tr "$OUT"/ZenOS-*.zip | tail -1`
         if [ ! -f $ZIPPATH ] ; then
             echo "Nothing to eat"
             return 1
@@ -116,7 +116,7 @@ function eat()
             done
             echo "Device Found.."
         fi
-        if (adb shell getprop org.pixelexperience.device | grep -q "$CUSTOM_BUILD"); then
+        if (adb shell getprop org.zen.device | grep -q "$CUSTOM_BUILD"); then
             # if adbd isn't root we can't write to /cache/recovery/
             adb root
             sleep 1
@@ -316,7 +316,7 @@ function githubremote()
 
     local PROJECT=$(echo $REMOTE | sed -e "s#platform/#android/#g; s#/#_#g")
 
-    git remote add github https://github.com/PixelExperience/$PROJECT
+    git remote add github https://github.com/zenos-made-by-zentalk/$PROJECT
     echo "Remote 'github' created"
 }
 
@@ -350,7 +350,7 @@ function installboot()
     sleep 1
     adb wait-for-online shell mount /system 2>&1 > /dev/null
     adb wait-for-online remount
-    if (adb shell getprop org.pixelexperience.device | grep -q "$CUSTOM_BUILD");
+    if (adb shell getprop org.zen.device | grep -q "$CUSTOM_BUILD");
     then
         adb push $OUT/boot.img /cache/
         if [ -e "$OUT/system/lib/modules/*" ];
@@ -399,7 +399,7 @@ function installrecovery()
     sleep 1
     adb wait-for-online shell mount /system 2>&1 >> /dev/null
     adb wait-for-online remount
-    if (adb shell getprop org.pixelexperience.device | grep -q "$CUSTOM_BUILD");
+    if (adb shell getprop org.zen.device | grep -q "$CUSTOM_BUILD");
     then
         adb push $OUT/recovery.img /cache/
         adb shell dd if=/cache/recovery.img of=$PARTITION
@@ -752,7 +752,7 @@ function dopush()
         echo "Device Found."
     fi
 
-    if (adb shell getprop org.pixelexperience.device | grep -q "$CUSTOM_BUILD") || [ "$FORCE_PUSH" = "true" ];
+    if (adb shell getprop org.zen.device | grep -q "$CUSTOM_BUILD") || [ "$FORCE_PUSH" = "true" ];
     then
     # retrieve IP and PORT info if we're using a TCP connection
     TCPIPPORT=$(adb devices \
@@ -883,12 +883,12 @@ alias cmkap='dopush cmka'
 
 function repopick() {
     T=$(gettop)
-    $T/vendor/aosp/build/tools/repopick.py $@
+    $T/vendor/zen/build/tools/repopick.py $@
 }
 
 function losrepopick() {
     T=$(gettop)
-    $T/vendor/aosp/build/tools/losrepopick.py $@
+    $T/vendor/zen/build/tools/losrepopick.py $@
 }
 
 function fixup_common_out_dir() {

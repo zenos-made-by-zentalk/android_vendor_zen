@@ -1,4 +1,4 @@
-# Inherit common PixelExperience stuff
-$(call inherit-product, vendor/aosp/config/common.mk)
+# Inherit common ZenOS stuff
+$(call inherit-product, vendor/zen/config/common.mk)
 
 PRODUCT_SIZE := full
