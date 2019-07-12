@@ -43,7 +43,7 @@ except ImportError:
 DEBUG = False
 default_manifest = ".repo/manifest.xml"
 
-custom_local_manifest = ".repo/local_manifests/zen.xml"
+custom_local_manifest = ".repo/local_manifests/devices.xml"
 custom_default_revision = "pie"
 custom_dependencies = "zen.dependencies"
 org_manifest = "zenos-zentalkvn-devices"  # leave empty if org is provided in manifest
