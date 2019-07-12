@@ -40,6 +40,19 @@ else
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += ro.adb.secure=1
 endif
 
+# Prebuilt Packages
+PRODUCT_PACKAGES += \
+    AmbientPlayProvider \
+    SoundPickerPrebuilt \
+    WellbeingPrebuilt \
+    WeatherClient
+
+PRODUCT_COPY_FILES += \
+    vendor/zen/etc/permissions/org.zen.ambient.play.xml:system/etc/permissions/org.zen.ambient.play.xml \
+    vendor/zen/etc/permissions/org.zen.weather.client.xml:system/etc/permissions/org.zen.weather.client.xml \
+    vendor/zen/etc/default-permissions/org.zen.weather.client.xml:system/etc/default-permissions/org.zen.weather.client.xml \
+    vendor/zen/etc/sysconfig/pixel.xml:system/etc/sysconfig/pixel.xml
+
 # Ambient Play
 PRODUCT_PACKAGES += \
     AmbientPlayHistoryProvider
@@ -153,8 +166,5 @@ PRODUCT_PACKAGES += \
 
 # Branding
 include vendor/zen/config/branding.mk
-
-# Pixel Style
-include vendor/pixelstyle/config.mk
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
