@@ -154,9 +154,6 @@ PRODUCT_PACKAGES += \
 # Branding
 include vendor/zen/config/branding.mk
 
-# OTA
-include vendor/zen/config/ota.mk
-
 # Pixel Style
 include vendor/pixelstyle/config.mk
 
