@@ -160,7 +160,4 @@ include vendor/zen/config/ota.mk
 # Pixel Style
 include vendor/pixelstyle/config.mk
 
-# Themes
-include vendor/themes/config.mk
-
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
